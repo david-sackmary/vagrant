@@ -1,19 +1,8 @@
-# This Vagrantfile can be used to develop Vagrant. Note that VirtualBox
-# doesn't run in VirtualBox so you can't actually _run_ Vagrant within
-# the VM created by this Vagrantfile, but you can use it to develop the
-# Ruby, run unit tests, etc.
+
 
 Vagrant.configure("2") do |config|
   config.vm.box = "hashicorp/precise64"
-
-  ["virtualbox", "vmware_fusion", "vmware_workstation"].each do |provider|
-    config.vm.provider provider do |v, override|
-      v.memory = "1024"
-    end
-  end
-
   config.vm.provision "shell", inline: $shell
-
   config.push.define "www", strategy: "local-exec" do |push|
     push.script = "scripts/website_push_www.sh"
   end
